@@ -14,6 +14,7 @@ const locations = [
     {loc: "London",
     gmtoff: 0, 
     img:  'url(./img/london.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Los Angeles",
     gmtoff: -8, 
@@ -30,6 +31,7 @@ const locations = [
     {loc: "Tokyo",
     gmtoff: 9, 
     img:  'url(./img/tokyo.jpg)',
+    audio: "./auds/cherry.m4a",
     color: 'black'},
     {loc: "Vienna",
     gmtoff: 1, 
@@ -122,6 +124,11 @@ function updateClock() {
   let h = currentTime.getHours();
   let m = currentTime.getMinutes();
   let s = currentTime.getSeconds();
+
+  if(s==0 && m==00){
+    let audio = new Audio (locations[rNum].audio);
+    audio.play(); 
+  }
 
 /*  let h = new Date().getHours();
   let m = new Date().getMinutes();
