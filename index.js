@@ -47,6 +47,9 @@ const secondEl = document.getElementById('seconds');
 const ampmEl = document.getElementById('ampm');
 const locationEl = document.getElementById('location');
 
+const formEl = document.getElementById("form")
+const inputEl = document.getElementById("input")
+
 const body = document.getElementsByTagName('body')[0];
 
 
@@ -72,6 +75,12 @@ ham.addEventListener("click", () => {
   let nav = document.getElementById('navbar');
 
   body.style.backgroundImage = locations[rNum].img;
+
+
+
+
+  console.log ("reached here")
+ // body.style.backgroundImage = "url(https://cdn.pixabay.com/photo/2022/11/08/06/26/woman-7577808_960_720.jpg)"
 
   locations.forEach((location) => {
     console.log(location.loc);
@@ -116,9 +125,18 @@ ham.addEventListener("click", () => {
 function updateClock() {
 
   let currentTime = new Date();
+  let dst = 0;
+  if (isDST(currentTime)){
+    dst = 1;
+  }
 
   // Call Function passing in GMT offset to get correct time 
-  currentTime = getTime(locations[rNum].gmtoff);
+  currentTime = getTime(locations[rNum].gmtoff + dst);
+  console.log("currenttime = " + currentTime)
+
+
+
+
 
 
   let h = currentTime.getHours();
@@ -174,3 +192,18 @@ function getTime(offset)
             $("#local").html(nd.toLocaleString());
             $("#utc").html(utc.toLocaleString());
         }
+
+        formEl.addEventListener("submit", () => {
+          const userAns = inputEl.value;
+          console.log("user ans  = " + userAns)
+          console.log ("reached here")
+          
+          body.style.backgroundImage =   "url('https://sebhastian.com/img/default.png')";
+        });
+
+
+        function isDST(d) {
+          let jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+          let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+          return Math.max(jan, jul) !== d.getTimezoneOffset();    
+      }

@@ -13,6 +13,7 @@ body{
   justify-content: center;
   background: url("https://images.unsplash.com/photo-1499002238440-d264edd596ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
   background-size: cover;
+
 }
 
 h2{
@@ -56,9 +57,10 @@ h2{
 #ampm{
   bottom: 0;
   position: absolute;
-  width: 60px;
+  width: 45px;
   height: 30px;
   font-size: 20px;
+  right: -35px;
 }
 
 
@@ -131,6 +133,9 @@ button:hover{
   transform: translateX(+295px);
 }
 
+.form{
+  display: none;
+}
     
 /* Media queries */
 @media (max-width: 750px){
