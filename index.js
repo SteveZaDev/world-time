@@ -57,11 +57,19 @@ const body = document.getElementsByTagName('body')[0];
 
 const ham = document.getElementById("ham");
 const navbar = document.getElementById("navbar");
+const close = document.getElementById("close-help");
+const helpbox = document.getElementById("help-box");
 
 ham.addEventListener("click", () => {
   navbar.classList.toggle("active");
   ham.classList.toggle("active");
 });
+
+close.addEventListener("click", () => {
+  close.classList.toggle("hidden");
+  helpbox.classList.toggle("hidden");
+});
+
 
   // GET ARRAY INDEX OF NYC and set it to rNum
 

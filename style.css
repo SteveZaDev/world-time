@@ -153,3 +153,43 @@ button:hover{
 
 }
 
+#help-box{
+  width: 85%;
+  max-width: 350px;
+  background-color: rgb(200, 200, 200, .6);
+  color: black;
+  position: absolute;
+  top: 0px;
+  justify-content: center;
+}
+
+p{
+  width: 100%;
+  background-color: rgba(102, 5, 5);
+  justify-content: center;
+  color: lightgray;
+}
+
+.modal-header{
+  background-color: rgba(102, 5, 5, 0.6);
+  display: flex;
+  top: 10px;
+  position: relative;
+  justify-content: center;
+}
+
+#close-help{
+  position: absolute;
+  top: 12px;
+  right: 35px;
+  font-size: 2rem;
+}
+
+#close-help:hover{
+  cursor: pointer;
+  color: white;
+}
+
+.hidden{
+  display: none;
+}
