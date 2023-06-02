@@ -53,6 +53,17 @@ const inputEl = document.getElementById("input")
 const body = document.getElementsByTagName('body')[0];
 
 
+let sound = true;
+let soundPlayer = "";
+//let randomAudioIdx = Math.floor(Math.random()*audios.length)
+soundPlayer = new Audio ("./auds/cherry.m4a");
+//let audioName = audios[randomAudioIdx].name;
+soundPlayer.loop = true;
+soundPlayer.volume = .105
+soundPlayer.currentTime = 1;
+
+
+
 
 
 const ham = document.getElementById("ham");
@@ -108,6 +119,7 @@ close.addEventListener("click", () => {
       navbar.classList.toggle("active");
       ham.classList.toggle("active");
       body.style.backgroundImage = locations[rNum].img;
+      soundPlayer.play();
       setInterval(updateClock, 1000);
     });
 
@@ -150,8 +162,14 @@ function updateClock() {
   let h = currentTime.getHours();
   let m = currentTime.getMinutes();
   let s = currentTime.getSeconds();
-
+/*
   if(s==0 && m==00){
+    let audio = new Audio (locations[rNum].audio);
+    audio.play(); 
+  }
+*/
+
+  if(s==00){
     let audio = new Audio (locations[rNum].audio);
     audio.play(); 
   }
