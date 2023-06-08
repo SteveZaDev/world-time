@@ -2,14 +2,17 @@ const locations = [
     {loc: "Amsterdam",
     gmtoff: 1, 
     img:  'url(./img/amsterdam.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Honolulu",
     gmtoff: -10, 
     img:  'url(./img/honolulu.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Kiev",
     gmtoff: 2, 
     img:  'url(./img/kiev.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "London",
     gmtoff: 0, 
@@ -19,14 +22,17 @@ const locations = [
     {loc: "Los Angeles",
     gmtoff: -8, 
     img:  'url(./img/losangeles.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "New York City",
     gmtoff: -5, 
     img:  'url(./img/nyc.jpg)',
+    audio: "./auds/london.m4a",
     color: 'orange'},
     {loc: "Sydney",
     gmtoff: 11, 
     img:  'url(./img/sydney.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Tokyo",
     gmtoff: 9, 
@@ -36,6 +42,7 @@ const locations = [
     {loc: "Vienna",
     gmtoff: 1, 
     img:  'url(./img/vienna2.jpg)',
+    audio: "./auds/london.m4a",
     color: 'black'}
 ]
 
@@ -56,12 +63,13 @@ const body = document.getElementsByTagName('body')[0];
 let sound = true;
 let soundPlayer = "";
 //let randomAudioIdx = Math.floor(Math.random()*audios.length)
+/*
 soundPlayer = new Audio ("./auds/cherry.m4a");
 //let audioName = audios[randomAudioIdx].name;
 soundPlayer.loop = true;
 soundPlayer.volume = .105
 soundPlayer.currentTime = 1;
-
+*/
 
 
 
@@ -119,6 +127,18 @@ close.addEventListener("click", () => {
       navbar.classList.toggle("active");
       ham.classList.toggle("active");
       body.style.backgroundImage = locations[rNum].img;
+
+      // added June 8, 2023
+  //    soundPlayer = new Audio (locations[rNum].audio);
+      soundPlayer.setar = (locations[rNum].audio);
+//let audioName = audios[randomAudioIdx].name;
+      soundPlayer.loop = true;
+      soundPlayer.volume = .105
+      soundPlayer.currentTime = 1;
+
+
+
+
       soundPlayer.play();
       setInterval(updateClock, 1000);
     });
@@ -168,12 +188,12 @@ function updateClock() {
     audio.play(); 
   }
 */
-
+/*
   if(s==00){
     let audio = new Audio (locations[rNum].audio);
     audio.play(); 
   }
-
+*/
 /*  let h = new Date().getHours();
   let m = new Date().getMinutes();
   let s = new Date().getSeconds();*/
@@ -238,3 +258,56 @@ function getTime(offset)
           let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
           return Math.max(jan, jul) !== d.getTimezoneOffset();    
       }
+
+
+
+// swiped-left
+document.addEventListener('swiped-left', function(e) {
+  console.log("swiped left")
+  if (rNum === (locations.length - 1)){
+    rNum = 0; 
+  } else {
+    rNum++;
+  }
+  body.style.backgroundImage = locations[rNum].img;
+});
+// swiped-right
+document.addEventListener('swiped-right', function(e) {
+  console.log("swiped right")
+
+
+  if (rNum === 0){
+    rNum = locations.length - 1; 
+  } else {
+    rNum--;
+  }
+  body.style.backgroundImage = locations[rNum].img;
+});
+// swiped-up
+document.addEventListener('swiped-up', function(e) {
+  console.log("swiped up")
+
+//  soundPlayer.play();
+//  setInterval(updateClock, 1000);
+
+  if (rNum === (locations.length - 1)){
+    rNum = 0; 
+  } else {
+    rNum++;
+  }
+  body.style.backgroundImage = locations[rNum].img;
+  
+});
+// swiped-down
+document.addEventListener('swiped-down', function(e) {
+  console.log("swiped down")
+
+
+  if (rNum === 0){
+    rNum = locations.length - 1; 
+  } else {
+    rNum--;
+  }
+  body.style.backgroundImage = locations[rNum].img;
+
+});
