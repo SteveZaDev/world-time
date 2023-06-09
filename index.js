@@ -1,47 +1,65 @@
 const locations = [
     {loc: "Amsterdam",
     gmtoff: 1, 
-    img:  'url(./img/amsterdam.jpg)',
+    dst: 'yes',
+    landscapeImg:  ['url(./img/amsterdam.jpg)'],
+    portraitImg:  ['url(./img/amsterdam.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Honolulu",
     gmtoff: -10, 
-    img:  'url(./img/honolulu.jpg)',
+    dst: 'no',
+    landscapeImg:  ['url(./img/honolulu.jpg)'],
+    portraitImg:  ['url(./img/honolulu.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
-    {loc: "Kiev",
-    gmtoff: 2, 
-    img:  'url(./img/kiev.jpg)',
+    {loc: "Kyiv",
+    gmtoff: 2,
+    dst: 'yes', 
+    landscapeImg:  ['url(./img/kiev.jpg)'],
+    portraitImg:  ['url(./img/kiev.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "London",
     gmtoff: 0, 
-    img:  'url(./img/london.jpg)',
+    dst: 'yes',
+    landscapeImg:  ['url(./img/london.jpg)'],
+    portraitImg:  ['url(./img/london.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Los Angeles",
-    gmtoff: -8, 
-    img:  'url(./img/losangeles.jpg)',
+    gmtoff: -8,
+    dst: 'yes', 
+    landscapeImg:  ['url(./img/losangeles.jpg)'],
+    portraitImg:  ['url(./img/losangeles.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "New York City",
     gmtoff: -5, 
-    img:  'url(./img/nyc.jpg)',
+    dst: 'yes',
+    landscapeImg:  ['url(./img/nyc.jpg)'],
+    portraitImg:  ['url(./img/tokyo.jpg)'],
     audio: "./auds/london.m4a",
     color: 'orange'},
     {loc: "Sydney",
-    gmtoff: 11, 
-    img:  'url(./img/sydney.jpg)',
+    gmtoff: 11,
+    dst: 'opp', 
+    landscapeImg:  ['url(./img/sydney.jpg)'],
+    portraitImg:  ['url(./img/sydney.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "Tokyo",
     gmtoff: 9, 
-    img:  'url(./img/tokyo.jpg)',
+    dst: 'no',
+    landscapeImg:  ['url(./img/tokyo.jpg)'],
+    portraitImg:  ['url(./img/tokyo.jpg)'],
     audio: "./auds/cherry.m4a",
     color: 'black'},
     {loc: "Vienna",
     gmtoff: 1, 
-    img:  'url(./img/vienna2.jpg)',
+    dst: 'yes',
+    landscapeImg:  ['url(./img/vienna2.jpg)'],
+    portraitImg:  ['url(./img/vienna2.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'}
 ]
@@ -60,16 +78,13 @@ const inputEl = document.getElementById("input")
 const body = document.getElementsByTagName('body')[0];
 
 
-let sound = true;
+
+let sound = false;
 let soundPlayer = "";
-//let randomAudioIdx = Math.floor(Math.random()*audios.length)
-/*
-soundPlayer = new Audio ("./auds/cherry.m4a");
+let imgX = 0;
 //let audioName = audios[randomAudioIdx].name;
-soundPlayer.loop = true;
-soundPlayer.volume = .105
-soundPlayer.currentTime = 1;
-*/
+
+
 
 
 
@@ -101,9 +116,17 @@ close.addEventListener("click", () => {
  // let rNum = 2;
   let nav = document.getElementById('navbar');
 
-  body.style.backgroundImage = locations[rNum].img;
+  if (window.innerHeight > window.innerWidth){
+  body.style.backgroundImage = locations[rNum].portraitImg[imgX];
+  } else {
+    body.style.backgroundImage = locations[rNum].landscapeImg[imgX];
+    }
+  soundPlayer = new Audio (locations[rNum].audio);
+  soundPlayer.loop = true;
+  soundPlayer.volume = .55
+  soundPlayer.currentTime = 1; 
 
-
+  initAudio();
 
 
   console.log ("reached here")
@@ -126,20 +149,10 @@ close.addEventListener("click", () => {
       rNum = locations.map(x => x.loc).indexOf(location.loc)
       navbar.classList.toggle("active");
       ham.classList.toggle("active");
-      body.style.backgroundImage = locations[rNum].img;
+      body.style.backgroundImage = locations[rNum].landscapeImg[0];
+      soundPlayer.setAttribute('src',locations[rNum].audio); //change the source
+      playMusic();
 
-      // added June 8, 2023
-  //    soundPlayer = new Audio (locations[rNum].audio);
-      soundPlayer.setar = (locations[rNum].audio);
-//let audioName = audios[randomAudioIdx].name;
-      soundPlayer.loop = true;
-      soundPlayer.volume = .105
-      soundPlayer.currentTime = 1;
-
-
-
-
-      soundPlayer.play();
       setInterval(updateClock, 1000);
     });
 
@@ -269,7 +282,9 @@ document.addEventListener('swiped-left', function(e) {
   } else {
     rNum++;
   }
-  body.style.backgroundImage = locations[rNum].img;
+  body.style.backgroundImage = locations[rNum].landscapeImg[0];
+  soundPlayer.setAttribute('src',locations[rNum].audio); //change the source
+  playMusic();
 });
 // swiped-right
 document.addEventListener('swiped-right', function(e) {
@@ -281,11 +296,14 @@ document.addEventListener('swiped-right', function(e) {
   } else {
     rNum--;
   }
-  body.style.backgroundImage = locations[rNum].img;
+  body.style.backgroundImage = locations[rNum].landscapeImg[0];
+  soundPlayer.setAttribute('src',locations[rNum].audio); //change the source
+  playMusic();
 });
 // swiped-up
 document.addEventListener('swiped-up', function(e) {
   console.log("swiped up")
+  return;
 
 //  soundPlayer.play();
 //  setInterval(updateClock, 1000);
@@ -295,12 +313,15 @@ document.addEventListener('swiped-up', function(e) {
   } else {
     rNum++;
   }
-  body.style.backgroundImage = locations[rNum].img;
+  body.style.backgroundImage = locations[rNum].landscapeImg[0];
+  soundPlayer.setAttribute('src',locations[rNum].audio); //change the source
+  playMusic();
   
 });
 // swiped-down
 document.addEventListener('swiped-down', function(e) {
   console.log("swiped down")
+  return;
 
 
   if (rNum === 0){
@@ -308,6 +329,52 @@ document.addEventListener('swiped-down', function(e) {
   } else {
     rNum--;
   }
-  body.style.backgroundImage = locations[rNum].img;
+  body.style.backgroundImage = locations[rNum].landscapeImg[0];
+  soundPlayer.setAttribute('src',locations[rNum].audio); //change the source
+  playMusic();
 
 });
+
+
+
+
+// Added on 6/9/23
+function initAudio(){
+  let icon = document.querySelector(".fa-volume-off");
+  
+  icon.onclick = function (){
+      music();
+      console.log("classlist when clicked = " + icon.classList)
+      if(icon.classList.contains("fa-volume-up")){
+          icon.classList.replace("fa-volume-up", "fa-volume-off");
+      }
+      else{
+          icon.classList.replace("fa-volume-off", "fa-volume-up");
+      }
+  }
+  }
+  
+  
+  function music(){
+    console.log("entered music toggle")
+    sound = !sound;
+    if (sound===false){
+      if (soundPlayer){
+        soundPlayer.pause();
+      }
+    }
+    if (sound===true){
+      if (soundPlayer){
+        soundPlayer.play();
+      }
+    }
+  }
+  
+  
+  function playMusic(){
+    if (sound){
+    soundPlayer.play();
+    }
+  }
+  
+  

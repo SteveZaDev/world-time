@@ -194,3 +194,19 @@ p{
   display: none;
 }
 
+
+
+#aud-icon{
+  background-color: var(--menuColor);
+  border: none;
+  color: white;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transition: transform 0.5s ease-in-out; 
+  font-size: 1.50rem;
+}
+#aud-icon:hover{
+  cursor: pointer;
+}
+
