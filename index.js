@@ -11,7 +11,7 @@ const locations = [
     dst: 'no',
     landscapeImg:  ['url(./img/honolulu.jpg)'],
     portraitImg:  ['url(./img/honolulu.jpg)'],
-    audio: "./auds/london.m4a",
+    audio: "./auds/pixabay/luau-144121.mp3",
     color: 'black'},
     {loc: "Kyiv",
     gmtoff: 2,
@@ -60,7 +60,7 @@ const locations = [
     dst: 'yes',
     landscapeImg:  ['url(./img/vienna2.jpg)'],
     portraitImg:  ['url(./img/vienna2.jpg)'],
-    audio: "./auds/london.m4a",
+    audio: "./auds/pixabay/orchestral-waltz-123256.mp3",
     color: 'black'}
 ]
 
