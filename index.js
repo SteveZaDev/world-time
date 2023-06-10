@@ -17,7 +17,7 @@ const locations = [
     gmtoff: 2,
     dst: 'yes', 
     landscapeImg:  ['url(./img/kiev.jpg)'],
-    portraitImg:  ['url(./img/kiev.jpg)'],
+    portraitImg:  ['url(./img/london.jpg)'],
     audio: "./auds/london.m4a",
     color: 'black'},
     {loc: "London",
@@ -66,6 +66,12 @@ const locations = [
 
 
 
+let helpText = `World Time - Travel to different cities of the world. The site opens with NYC. View available cities by opening the menu on the upper left of the screen. Click the audio button to toggle on and off background music. On mobile devices you can swipe left or right to cycle thru all the cities.   
+---------------
+----------------
+`
+
+
 const hourEl = document.getElementById('hour');
 const minuteEl = document.getElementById('minutes');
 const secondEl = document.getElementById('seconds');
@@ -104,6 +110,7 @@ close.addEventListener("click", () => {
   helpbox.classList.toggle("hidden");
 });
 
+initHelpModal();
 
   // GET ARRAY INDEX OF NYC and set it to rNum
 
@@ -187,7 +194,12 @@ function updateClock() {
   currentTime = getTime(locations[rNum].gmtoff + dst);
   console.log("currenttime = " + currentTime)
 
+  body.style.backgroundImage = locations[rNum].landscapeImg[0];
 
+  if (window.innerHeight > window.innerWidth){
+    body.style.backgroundImage = locations[rNum].portraitImg[0];
+  
+  }
 
 
 
@@ -376,5 +388,38 @@ function initAudio(){
     soundPlayer.play();
     }
   }
+  
+  function initHelpModal() {
+    const modal = document.getElementById("help-modal");
+    const btn = document.getElementById("help-icon");
+  
+    // Get the <span> element that closes the modal
+    const span = document.getElementById("close-help2");
+  
+  
+
+  // When the user clicks on the button, open the modal
+  btn.addEventListener("click", function () {
+    console.log("just clicked on help button")
+    modal.style.display = "block";
+    helpEl = document.querySelector(".modal-body")
+    helpEl.innerText = helpText + "\n" + "\n"
+  });
+
+
+    // When the user clicks on <span> (x), close the modal
+    span.addEventListener("click", function () {
+      modal.style.display = "none";
+      console.log("clicked on X span")
+    });
+  
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
+  
   
   

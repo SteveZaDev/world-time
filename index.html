@@ -15,6 +15,7 @@
 </head>
 <body>
   <button id="ham">☰</button>
+  <i class="fa fa-question-circle" id="help-icon" aria-hidden="true"></i>
   <i class="fa fa-volume-off" id="aud-icon"></i>
        
 
@@ -46,17 +47,31 @@
      <h3>DIGITAL CLOCK</h3>
      <span class="close" id="close-help">&times;</span>
     </div>
-    <p>I know this site doesn't do much at the moment but I like to watch the numbers change. 
-      Check back in the near future for the following additions. 
+    <p>I know this site doesn't do much at the moment but check back in the near future for the following additions. 
       - More Cities
       - City facts that will randomly appear
-      - Background music 
+      - Background music for each city 
       - Multiple pics for each city that will randomly change in desktop mode and on mobile will change on swipe up
       - 5 second display of the name of the pic as it appears
-      - Swipe left right to cycle thru Cities
       - fixes to daylight savings time errors
+
+      - In the meantime please read the help for current functionality
         
     </p>
+  </div>
+
+
+  <div id="help-modal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header2">
+        <h2>Welcome to World Time!</h2>
+       <span class="close" id="close-help2">&times;</span>
+      </div>
+      <div class="modal-body" id="view-help">
+      </div>
+
+  </div>
   </div>
 
   <form class="form" id="form">
